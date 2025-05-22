@@ -1,6 +1,20 @@
-import { Controller, Get, Body, Param, Post, Put, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Param,
+  Post,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { AppService } from './app.service';
-import { ApiOperation, ApiResponse, ApiTags, ApiBody, ApiParam } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+  ApiBody,
+  ApiParam,
+} from '@nestjs/swagger';
 
 @ApiTags('Test')
 @Controller('test')
@@ -9,7 +23,10 @@ export class AppController {
 
   @Get()
   @ApiOperation({ summary: 'Hello 메시지 반환' })
-  @ApiResponse({ status: 200, description: '성공적으로 Hello 메시지를 반환합니다.' })
+  @ApiResponse({
+    status: 200,
+    description: '성공적으로 Hello 메시지를 반환합니다.',
+  })
   getHello(): string {
     return this.appService.getHello();
   }
