@@ -15,37 +15,25 @@ import {
   ApiBody,
   ApiParam,
 } from '@nestjs/swagger';
+import { GetUserDocs } from './app.docs';
 
 @Controller('test')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @ApiTags('Users')
   @Get()
-  @ApiOperation({ summary: 'Hello 메시지 반환' })
-  @ApiResponse({
-    status: 200,
-    description: '성공적으로 Hello 메시지를 반환합니다.',
-  })
   getHello(): string {
     console.log('Hi');
     return this.appService.getHello();
   }
 
-  @ApiTags('New')
   @Post()
-  @ApiOperation({ summary: '테스트용 POST 엔드포인트' })
-  @ApiBody({ schema: { example: { name: '홍길동' } } })
-  @ApiResponse({ status: 201, description: 'POST 성공' })
   createTest(@Body() body: any) {
     return { message: 'POST 성공', data: body };
   }
 
   @Put(':id')
-  @ApiOperation({ summary: '테스트용 PUT 엔드포인트' })
-  @ApiParam({ name: 'id', required: true, description: '수정할 리소스의 ID' })
-  @ApiBody({ schema: { example: { name: '수정된 이름' } } })
-  @ApiResponse({ status: 200, description: 'PUT 성공' })
+  @GetUserDocs()
   updateTest(@Param('id') id: string, @Body() body: any) {
     return { message: 'PUT 성공', id, data: body };
   }
