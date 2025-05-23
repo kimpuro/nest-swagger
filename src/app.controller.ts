@@ -16,11 +16,11 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 
-@ApiTags('Test')
 @Controller('test')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @ApiTags('Users')
   @Get()
   @ApiOperation({ summary: 'Hello 메시지 반환' })
   @ApiResponse({
@@ -32,6 +32,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @ApiTags('New')
   @Post()
   @ApiOperation({ summary: '테스트용 POST 엔드포인트' })
   @ApiBody({ schema: { example: { name: '홍길동' } } })
