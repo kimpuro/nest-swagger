@@ -28,6 +28,7 @@ export class AppController {
     description: '성공적으로 Hello 메시지를 반환합니다.',
   })
   getHello(): string {
+    console.log('Hi');
     return this.appService.getHello();
   }
 
