@@ -15,19 +15,21 @@ import {
   ApiBody,
   ApiParam,
 } from '@nestjs/swagger';
-import { GetUserDocs } from './app.docs';
+import { GetUserDocs, GetAllDocs, CreateTestDocs, DeleteTestDocs } from './app.docs';
 
 @Controller('test')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
+  @GetAllDocs()
   getHello(): string {
     console.log('Hi');
     return this.appService.getHello();
   }
 
   @Post()
+  @CreateTestDocs()
   createTest(@Body() body: any) {
     return { message: 'POST 성공', data: body };
   }
@@ -39,9 +41,7 @@ export class AppController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: '테스트용 DELETE 엔드포인트' })
-  @ApiParam({ name: 'id', required: true, description: '삭제할 리소스의 ID' })
-  @ApiResponse({ status: 200, description: 'DELETE 성공' })
+  @DeleteTestDocs()
   deleteTest(@Param('id') id: string) {
     return { message: 'DELETE 성공', id };
   }
